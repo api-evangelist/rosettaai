@@ -1,7 +1,18 @@
 aid: rosettaai
 name: Rosetta.ai
-description: Rosetta.ai is a company surfaced as a portfolio company of 500-global and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Rosetta.ai is a Taipei-based e-commerce personalization and marketing
+  automation platform that uses AI, image recognition, and deep learning to
+  tailor the online shopping experience for every visitor. Its product suite
+  spans Rosetta Engage (AI product recommenders), Rosetta AdMatch (personalized
+  advertising and traffic acquisition), Rosetta Analytics (machine-learning
+  consumer and product insight), and Rosetta Automation (multi-channel EDM, SMS,
+  and LINE marketing). The platform is delivered as a hosted SaaS dashboard and
+  as a Shopify app ("Personalization Upsell Dealer"), integrating with
+  storefronts through Google Tag Manager and product-feed connections rather
+  than a public developer REST API. This profile was surfaced as a 500 Global
+  portfolio company and enriched from Rosetta.ai's public marketing site, GitBook
+  help center, and GitHub organization.
 url: https://raw.githubusercontent.com/api-evangelist/rosettaai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,11 +20,32 @@ x-backed-by:
 - 500-global
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+image: https://images.prismic.io/rosetta-marketing-website/9621daef-3ce6-47d3-abec-1a4210f8fbb9_Social%20Card%20-%20Homepage.png
 tags:
 - Company
+- E-commerce
+- Personalization
+- Recommendations
+- Marketing Automation
+- Artificial Intelligence
+- Retail
+- Shopify
+- Machine Learning
+- Conversion Optimization
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -21,5 +53,39 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/rosettaai-domain-security.yml
 - type: Website
   url: https://rosetta.ai
+- type: Documentation
+  url: https://rosetta-ai.gitbook.io/help-center/
+- type: GettingStarted
+  url: https://rosetta-ai.gitbook.io/help-center/onboarding/getting-started
+- type: Support
+  url: https://rosetta-ai.gitbook.io/help-center/support/faq
+- type: Blog
+  url: https://rosetta.ai/blog
+- type: Pricing
+  url: https://rosetta.ai/pricing
+- type: SignUp
+  url: https://dashboard.rosetta.ai/register
+- type: Login
+  url: https://dashboard.rosetta.ai/login
+- type: TermsOfService
+  url: https://rosetta.ai/terms
+- type: PrivacyPolicy
+  url: https://rosetta.ai/privacy
+- type: GitHubOrganization
+  url: https://github.com/rosetta-ai
+- type: ChangeLog
+  url: https://rosetta-ai.gitbook.io/help-center/support/changelog
+- type: ChangeLog
+  url: changelog/rosettaai-changelog.yml
+  name: Rosetta.ai changelog (captured)
+- type: LLMsTxt
+  url: llms/rosettaai-llms.txt
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 3
+  pass: local-v1

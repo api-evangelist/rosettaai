@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: searched
+source: https://rosetta-ai.gitbook.io/help-center/support/changelog
+scheme: dated
+notes: >-
+  Rosetta.ai publishes a dated, product-feature changelog in its GitBook help
+  center rather than a semantic-versioned API changelog (Rosetta.ai ships as a
+  hosted SaaS / Shopify app, not a public developer API). Entries below are the
+  recent window captured verbatim from the help-center changelog; each is a
+  product/help-center update, not a breaking API change.
+current_version: null
+entries:
+- date: '2024-02'
+  breaking: false
+  highlights:
+  - Added new Discovery plugins and Search Plugin
+  - Optimized site-wide URL slugs in the Help Center
+- date: '2024-01'
+  breaking: false
+  highlights:
+  - Added FAQ for Contract Subscription cancellation processes
+  - Added Additional Trigger Setting to Promotions configuration
+- date: '2023-12'
+  breaking: false
+  highlights:
+  - Added FAQ on AdStyle performance on GA/GA4
+  - Added Story Plugins as a new promotion feature
+  - Added "No Spender" group to analytics data categories
+  - Updated pricing information (New Plans and Billing)
+  - Added Scroll-to-Trigger layout option for Recommenders
+- date: '2023-11'
+  breaking: false
+  highlights:
+  - Added mandatory data requirements for self-hosted Product Feed setup
+  - Added new Product Analytics feature
+- date: '2023-10'
+  breaking: false
+  highlights:
+  - Added One-click Setup for Recommenders
+  - Restructured Help Center menu structure
+- date: '2023-09'
+  breaking: false
+  highlights:
+  - Added Realtime Preference recommendation type
+  - Added Content tab and Recommender Health Status to the Dashboard
