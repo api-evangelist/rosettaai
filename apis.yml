@@ -10,9 +10,13 @@ description: >-
   and LINE marketing). The platform is delivered as a hosted SaaS dashboard and
   as a Shopify app ("Personalization Upsell Dealer"), integrating with
   storefronts through Google Tag Manager and product-feed connections rather
-  than a public developer REST API. This profile was surfaced as a 500 Global
-  portfolio company and enriched from Rosetta.ai's public marketing site, GitBook
-  help center, and GitHub organization.
+  than a public developer REST API. A first-party REST API does run at
+  api.rosetta.ai — the production tag authenticates to it with a Bearer token and
+  an application/vnd.rosetta-ai.v2+json media type — but Rosetta.ai publishes no
+  reference, no specification and no developer program for it, so it is an
+  internal contract rather than a product. This profile was surfaced as a 500
+  Global portfolio company and enriched from Rosetta.ai's public marketing site,
+  GitBook help center, CDN distribution, and GitHub organization.
 url: https://raw.githubusercontent.com/api-evangelist/rosettaai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -33,7 +37,7 @@ accessModel:
   method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-13'
 image: https://images.prismic.io/rosetta-marketing-website/9621daef-3ce6-47d3-abec-1a4210f8fbb9_Social%20Card%20-%20Homepage.png
 tags:
 - Company
@@ -84,8 +88,29 @@ common:
   name: Rosetta.ai changelog (captured)
 - type: LLMsTxt
   url: llms/rosettaai-llms.txt
+- type: Plans
+  url: plans/rosettaai-plans-pricing.yml
+  name: Rosetta.ai plans and pricing (captured)
+- type: RateLimits
+  url: rate-limits/rosettaai-rate-limits.yml
+  name: Rosetta.ai rate limits and usage quota
+- type: Packages
+  url: packages/rosettaai-packages.yml
+  name: Rosetta.ai first-party distribution (CDN tag and storefront plugins)
+- type: Components
+  url: components/rosettaai-components.yml
+  name: Rosetta.ai on-site component families
+- type: Conformance
+  url: conformance/rosettaai-conformance.yml
+  name: Rosetta.ai standards and regulatory conformance
+- type: Conventions
+  url: conventions/rosettaai-conventions.yml
+  name: Rosetta.ai API conventions (observed)
+- type: Lifecycle
+  url: lifecycle/rosettaai-lifecycle.yml
+  name: Rosetta.ai lifecycle, versioning and operational signals
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-13'
   status: enriched
-  artifacts_added: 3
+  artifacts_added: 9
   pass: local-v1
