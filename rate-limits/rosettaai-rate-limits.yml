@@ -1,0 +1,31 @@
+generated: '2026-08-13'
+method: searched
+source: https://rosetta-ai.gitbook.io/help-center/account-and-payment/manage-plans-and-billing/change-subscription-plan/understanding-plans
+limit_count: 0
+headers: []
+status_code_on_exhaustion: null
+limits: []
+quota_model:
+  present: true
+  kind: monthly-volume-quota
+  metric: impressions / requests served by the on-site tag
+  enforcement: billed-overage
+  note: >-
+    Rosetta.ai publishes a monthly VOLUME QUOTA, not a rate limit. Each plan
+    includes a monthly impression allowance (Essential 250,000 / Professional
+    500,000 / Visionary 4,000,000) and anything beyond it is billed as overage per
+    1,000 requests (US$0.50 / US$0.30 / US$0.20 respectively). Exceeding the
+    allowance costs money; nothing in the published documentation says a request is
+    ever throttled, rejected, or answered with 429. Those are different contracts
+    and are recorded separately here so the quota is not mistaken for a rate limit.
+  source: https://rosetta-ai.gitbook.io/help-center/account-and-payment/manage-plans-and-billing/change-subscription-plan/understanding-plans
+notes: >-
+  limit_count is an honest zero. Rosetta.ai publishes NO rate limits: no per-key,
+  per-account or per-endpoint window, no burst allowance, no documented 429
+  behaviour, and no RateLimit-*/X-RateLimit-*/Retry-After response headers. This is
+  consistent with the shape of the company's surface — the first-party API at
+  api.rosetta.ai (see authentication/rosettaai-authentication.yml) is called by
+  Rosetta.ai's own tag, not by third-party developers, and has no published
+  reference in which limits could be documented. No unauthenticated live response
+  could be observed to probe headers, because every endpoint on that host requires
+  a Bearer token.

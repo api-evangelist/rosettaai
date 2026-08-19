@@ -1,0 +1,97 @@
+generated: '2026-08-13'
+method: derived
+source: https://cdn.rosetta.ai/rosetta.min.js
+docs: null
+provenance_note: >-
+  DERIVED FROM FIRST-PARTY SHIPPED CODE, NOT FROM DOCUMENTATION. Rosetta.ai
+  publishes no authentication page, no API reference and no OpenAPI. Everything
+  below was read directly out of Rosetta.ai's own production on-site tag,
+  https://cdn.rosetta.ai/rosetta.min.js (HTTP 200, 47,751 bytes, VERSION="2.0.0"),
+  which is served from a hostname Rosetta.ai controls and is the exact file its
+  merchants load. It is recorded as an observation of a real, live auth scheme —
+  it is NOT a claim that Rosetta.ai documents any of this, and no spec has been
+  synthesised from it.
+api_host: https://api.rosetta.ai
+api_host_status: >-
+  Live. Resolves to 146.190.4.25 (DigitalOcean), Laravel application, HTTP/2,
+  HSTS max-age=15724800; includeSubDomains. Returns a genuine Laravel 404 for
+  unknown paths and 204 for /sanctum/csrf-cookie, which is what identifies the
+  stack.
+public_developer_program: false
+security_schemes:
+- id: bearerToken
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: 'Authorization: Bearer <token>'
+  evidence: >-
+    axios instance constructed in rosetta.min.js with
+    headers:{Authorization:`Bearer ${e}`} against baseURL "https://api.rosetta.ai/".
+  token_issuance: >-
+    Not observable anonymously. The v2 tag receives its token from the surrounding
+    page configuration. A newer (and currently DEAD — see packages/) bundle,
+    rosetta-web.js, calls POST /api/user/issue-token to mint one, which indicates a
+    token-issuance endpoint exists on the API, but that bundle points at
+    v4-api.rosetta.ai, which does not resolve.
+  scopes: none-observed
+  rotation_policy: not-published
+  expiry: not-published
+- id: sessionCookie
+  type: cookie
+  scheme: laravel-sanctum
+  evidence: >-
+    https://api.rosetta.ai/sanctum/csrf-cookie returns HTTP 204, and
+    https://api.rosetta.ai/login returns HTTP 200. This is Laravel Sanctum's
+    SPA/cookie session flow, used by the dashboard.rosetta.ai front end rather
+    than by any third-party integrator.
+  public: false
+oauth2: false
+openid_connect: false
+mutual_tls: false
+api_keys_self_service: false
+content_negotiation:
+  accept: application/vnd.rosetta-ai.v2+json
+  note: >-
+    The tag pins the API version through a vendor media type in the Accept header
+    rather than through a URL path segment. See conventions/.
+observed_operations:
+- method: POST
+  path: /entity
+  body_fields: [name, id, fingerprint, type]
+  purpose: identify or create an actor (visitor/user), keyed by browser fingerprint
+- method: POST
+  path: /entity/local_retrieval
+  body_fields: [local_id]
+  purpose: resolve a locally stored identifier back to an entity
+- method: GET
+  path: /entity/{item}
+  purpose: retrieve a single entity
+- method: POST
+  path: /event
+  body_fields: [actor, action, target]
+  purpose: behavioural event ingest (actor/action/target triple)
+- method: POST
+  path: /engine/{engineID}/query
+  body_fields: [user, item]
+  purpose: request recommendations from a named recommendation engine
+observed_operations_note: >-
+  These are the request paths the production tag actually issues. They are recorded
+  as evidence of the shape of the auth surface. NO OpenAPI has been written from
+  them and none should be: an operation list reverse-read from a minified bundle is
+  an observation, not a contract the provider published, and turning it into a spec
+  would manufacture a developer surface Rosetta.ai does not offer.
+pointer_decision:
+  emit_authentication_pointer: false
+  reason: >-
+    Deliberately NOT wired as `type: Authentication` in apis.yml. That pointer feeds
+    the `authentication_documented` check, and Rosetta.ai documents nothing — this
+    file exists only because the scheme could be read out of shipped code. Emitting
+    the pointer would convert our reverse-reading into the provider's documentation
+    and award points for a page that does not exist. The artifact stays in the repo
+    as evidence; the pointer is withheld until Rosetta.ai publishes an auth page.
+gaps:
+- No published authentication documentation of any kind.
+- No self-service API credential issuance; no API keys page in the dashboard docs.
+- No token lifetime, refresh or revocation policy published.
+- No OAuth 2.0, OIDC or scope model.

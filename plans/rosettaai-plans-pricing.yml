@@ -1,0 +1,127 @@
+generated: '2026-08-13'
+method: searched
+source: https://rosetta-ai.gitbook.io/help-center/account-and-payment/manage-plans-and-billing/change-subscription-plan/understanding-plans
+sources:
+- url: https://rosetta.ai/pricing
+  status: 200
+  note: >-
+    Public pricing page. Tier names, page-view quotas and the feature matrix render
+    server-side, but the price figures are injected client-side and render as
+    "USD $/ month" in the served HTML. The add-on prices below come from this page.
+- url: https://rosetta-ai.gitbook.io/help-center/account-and-payment/manage-plans-and-billing/change-subscription-plan/understanding-plans
+  status: 200
+  note: >-
+    Help-center "Understanding Plans" page. This is where Rosetta.ai publishes the
+    actual dollar figures and the overage rates, so it is the primary source for
+    price, and the pricing page is the secondary source for the feature matrix.
+currency: USD
+billing_periods:
+- monthly
+- yearly
+plan_count: 3
+plans:
+- name: Essential
+  positioning: AI Recommendation System
+  price_monthly: 199
+  price_yearly: 2148
+  price_yearly_effective_monthly: 179
+  currency: USD
+  included_quota:
+    metric: impressions
+    amount: 250000
+    period: month
+    note: >-
+      The public pricing page describes the same allowance as "250,000 page views";
+      the help center calls it "250,000" impressions. Both figures are 250,000 —
+      the two pages disagree on the noun, not the number.
+  overage:
+    rate: 0.5
+    currency: USD
+    per: 1000 requests
+    note: US$ 0.5 per 1,000 requests beyond the monthly threshold.
+  cta: Try for Free
+  features:
+  - Scroll-to-trigger
+  - In-page carousel
+  - Sticky widget
+  - Coupon code promotion
+  - A/B test report
+- name: Professional
+  positioning: AI Personalized Shopping Experience
+  price_monthly: 599
+  price_yearly: 6468
+  price_yearly_effective_monthly: 539
+  currency: USD
+  included_quota:
+    metric: impressions
+    amount: 500000
+    period: month
+  overage:
+    rate: 0.3
+    currency: USD
+    per: 1000 requests
+  cta: Contact us
+  features:
+  - All Essential features
+  - AI-driven exit intent promotion
+  - Instagram story highlights
+  - Personalized search plugin
+- name: Visionary
+  positioning: 360-Degree Full Consulting Service
+  price_monthly: 1299
+  price_yearly: 14028
+  price_yearly_effective_monthly: 1169
+  currency: USD
+  included_quota:
+    metric: impressions
+    amount: 4000000
+    period: month
+    note: >-
+      SOURCE DISAGREEMENT, recorded rather than resolved: the help-center
+      "Understanding Plans" page states 4,000,000 for Visionary, while the public
+      /pricing page states 1,000,000 page views for the same tier. Neither page is
+      dated. The help-center figure is carried in `amount` because that is the page
+      that also carries the prices; the /pricing figure is recorded here so the
+      conflict is visible instead of silently collapsed.
+    conflicting_value: 1000000
+    conflicting_source: https://rosetta.ai/pricing
+  overage:
+    rate: 0.2
+    currency: USD
+    per: 1000 requests
+  cta: Contact us
+  features:
+  - All Professional features
+  - Blog SEO product recommendations
+  - Personalized marketing module
+  - Exclusive account manager one-on-one service
+add_ons:
+- name: Advertisement Traffic Diversion
+  pricing_model: performance-based
+  price: null
+  note: >-
+    "Performance-based advertising, with charges only upon successful transactions."
+    No rate published; contact sales.
+- name: Add-on Support Hours
+  price_range:
+    min: 700
+    max: 2800
+  currency: USD
+  unit: 10-50 hours
+- name: Product Catalog Training
+  price_range:
+    min: 31.85
+    max: 41.41
+  currency: USD
+  unit: per instance
+- name: Email (EDM)
+  price: 0.05
+  currency: USD
+  unit: per message
+notes: >-
+  Rosetta.ai prices the SaaS product, not an API. There is no developer/API plan,
+  no per-call price list and no free developer tier — the "Try for Free" CTA on
+  Essential leads to dashboard registration for the merchant product. The metered
+  unit is impressions/page views served by the on-site tag, and overage is billed
+  per 1,000 requests, which is the closest thing Rosetta.ai publishes to a usage
+  contract.

@@ -1,0 +1,148 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  npm registry, PyPI, Packagist, RubyGems, crates.io, NuGet, Maven Central,
+  pkg.go.dev, github.com/rosetta-ai, and https://cdn.rosetta.ai/
+registry_search:
+  npm:
+    queried: 'https://registry.npmjs.org/-/v1/search?text=rosetta.ai'
+    first_party_hits: 0
+    note: >-
+      NEGATIVE RESULT, and an important one. The npm package literally named
+      `rosetta-ai` (latest 2.2.0, published 2026-06-17) is NOT this company — it is
+      "The translation layer for LLM provider messages" published by Latitude Data
+      SL. Same string, different company. It is recorded here so a later round does
+      not adopt it. `rosettaai`, `rosetta-sdk` and `online-shop-components` are all
+      404 on npm.
+  packagist:
+    queried: 'https://packagist.org/search.json?q=rosetta-ai'
+    first_party_hits: 0
+  pypi:
+    first_party_hits: 0
+  rubygems:
+    first_party_hits: 0
+  crates_io:
+    first_party_hits: 0
+  nuget:
+    first_party_hits: 0
+  maven_central:
+    first_party_hits: 0
+  go:
+    first_party_hits: 0
+packages:
+- name: rosetta.min.js
+  language: javascript
+  official: true
+  registry: cdn
+  url: https://cdn.rosetta.ai/rosetta.min.js
+  repository: null
+  version: 2.0.0
+  published: null
+  installed_by: script tag / Google Tag Manager custom HTML tag
+  note: >-
+    The first-party on-site tag, and the only Rosetta.ai client library a customer
+    actually loads. Distribution is CDN, not a registry, so there is no metadata
+    endpoint to query. `version: 2.0.0` was read out of the bundle itself (a
+    literal `VERSION="2.0.0"` in the shipped minified source), NOT from any
+    registry. `published: null` because the CDN exposes only a bucket
+    LastModified (2025-10-22T05:15:23Z), which is a mirror-copy timestamp from the
+    DigitalOcean Spaces migration, not a release date. The URL is UNPINNED — it
+    carries no version segment and floats to whatever is current — so a merchant
+    embedding it cannot tell which build they are getting either. That is the
+    finding, not a gap in this record.
+  observed_api_base: https://api.rosetta.ai
+- name: rosetta-web.js
+  language: javascript
+  official: true
+  registry: cdn
+  url: https://cdn.rosetta.ai/rosetta-web.js
+  repository: null
+  version: null
+  published: null
+  status: stale
+  note: >-
+    A larger, newer-generation bundle (301,916 bytes) sitting beside rosetta.min.js
+    on the same CDN. It carries no version literal, and its hard-coded API base
+    `https://v4-api.rosetta.ai` DOES NOT RESOLVE (NXDOMAIN as of 2026-08-13), so
+    the artifact is dead on arrival for anyone who loads it. Recorded as an
+    abandonment signal, not as a usable package. `rosetta-web-staging.js`,
+    `staging-rosetta-web.js` and two dated `_backup-2020xxxx` copies are published
+    at the same public prefix, along with `.js.map` source maps.
+- name: plugin-91app.js
+  language: javascript
+  official: true
+  registry: cdn
+  url: https://cdn.rosetta.ai/plugin-91app.js
+  version: null
+  published: null
+  note: >-
+    Platform-specific storefront plugin build for 91APP. Unpinned, unversioned. The
+    only dating available is dated sibling files (`_backup-20200730`,
+    `_backup-20200902`) which place this generation of the plugin in 2020.
+- name: plugin-shopline.js
+  language: javascript
+  official: true
+  registry: cdn
+  url: https://cdn.rosetta.ai/plugin-shopline.js
+  version: null
+  published: null
+  note: >-
+    Storefront plugin build for SHOPLINE. Unpinned, unversioned; dated backup
+    siblings run to 2020-09-22.
+- name: plugin-demandware.js
+  language: javascript
+  official: true
+  registry: cdn
+  url: https://cdn.rosetta.ai/plugin-demandware.js
+  version: null
+  published: null
+  note: >-
+    Storefront plugin build for Demandware / Salesforce Commerce Cloud. Unpinned,
+    unversioned.
+- name: plugin-waca.js
+  language: javascript
+  official: true
+  registry: cdn
+  url: https://cdn.rosetta.ai/plugin-waca.js
+  version: null
+  published: null
+  note: Storefront plugin build for WACA. Unpinned, unversioned.
+- name: online-shop-components
+  language: javascript
+  official: true
+  registry: none
+  url: https://github.com/rosetta-ai/online-shop-components
+  repository: https://github.com/rosetta-ai/online-shop-components
+  version: '1.0.0'
+  published: null
+  note: >-
+    First-party MIT-licensed component source in the Rosetta.ai GitHub org
+    (banner, carousel, headline, modal, queue; peer-dependency @glidejs/glide).
+    `version: 1.0.0` is the package.json value; `published: null` because it was
+    NEVER published to npm (registry 404) and has no tags or releases. Last push
+    2020-07-20. The compiled stylesheet from it IS live in production at
+    https://cdn.rosetta.ai/plugins/all/css/online-shop-components.css, so this is
+    shipped code with no distribution channel, not an abandoned experiment.
+- name: rosetta-sdk-php
+  language: php
+  official: true
+  registry: none
+  url: https://github.com/rosetta-ai/rosetta-sdk-php
+  version: null
+  published: null
+  status: empty
+  note: >-
+    Repository is titled "Rosetta.ai API SDK for PHP" — the only thing in the whole
+    public surface that names an SDK — but the GitHub API reports size 0: the repo
+    contains no code. Last push 2018-08-11. Recorded because the NAME is evidence
+    that a public PHP SDK was once intended, and the EMPTINESS is evidence it never
+    shipped. Not installable, not on Packagist.
+official_sdk_count: 0
+notes: >-
+  NO `SDKs` POINTER IS EMITTED. Rosetta.ai publishes no installable, first-party
+  client library on any package registry in any language. What it does publish is a
+  CDN-distributed on-site tag and four platform plugin builds — real first-party
+  code, loaded by real merchants, but a tag is not an SDK and none of it is
+  versioned, pinned, released or fetchable through a package manager. The one repo
+  that calls itself an SDK is empty. Emitting `SDKs` here would credit Rosetta.ai
+  with a developer distribution channel it does not have.

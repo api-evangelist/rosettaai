@@ -1,0 +1,80 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://rosetta-ai.gitbook.io/help-center/support/changelog ,
+  https://rosetta.ai/terms , live DNS/HTTP probes
+versioning:
+  scheme: vendor-media-type
+  current: application/vnd.rosetta-ai.v2+json
+  policy_published: false
+  see: conventions/rosettaai-conventions.yml
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  advance_notice: not-published
+  note: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation headers, and no
+    end-of-life schedule for any product or API generation. NO `Deprecation`
+    pointer is emitted in apis.yml.
+  observed_undeclared_deprecation:
+    what: v4 API generation
+    evidence: >-
+      The rosetta-web.js bundle published at https://cdn.rosetta.ai/rosetta-web.js
+      hard-codes https://v4-api.rosetta.ai as its API base. That hostname returned
+      NXDOMAIN on 2026-08-13. A whole API generation was retired without any
+      published notice, and the client that depends on it is still being served
+      from the company's production CDN. This is the clearest lifecycle finding in
+      the profile.
+    probed: '2026-08-13'
+status_page:
+  present: false
+  url: null
+  probes:
+  - url: https://status.rosetta.ai
+    result: NXDOMAIN
+  - url: https://rosetta.ai/status
+    status: 404
+  note: >-
+    No status page and no uptime history of any kind. NO `StatusPage` pointer is
+    emitted in apis.yml.
+sla:
+  published: false
+  note: >-
+    No uptime commitment, credit schedule or support-response SLA is published. The
+    Visionary tier advertises an "exclusive account manager one-on-one service" and
+    support hours can be bought as an add-on (US$700–2,800 for 10–50 hours), but
+    neither is expressed as a service level.
+  source: https://rosetta.ai/pricing
+changelog:
+  present: true
+  kind: product-feature changelog (not an API changelog)
+  url: https://rosetta-ai.gitbook.io/help-center/support/changelog
+  artifact: changelog/rosettaai-changelog.yml
+  most_recent_entry: '2024-02'
+  cadence_note: >-
+    Monthly through the 2023-09 to 2024-02 window captured in the changelog
+    artifact, then nothing. Re-checked 2026-08-13: the help-center llms.txt index
+    fetched live is byte-identical to the copy captured on 2026-07-21, so the
+    documentation set has not changed in the intervening period either. Roughly
+    two and a half years with no published product update.
+roadmap:
+  present: false
+  probes:
+  - url: https://rosetta.ai/roadmap
+    status: 404
+support:
+  channels:
+  - kind: help-center
+    url: https://rosetta-ai.gitbook.io/help-center/support/faq
+  - kind: email
+    value: hey@rosetta.ai
+  - kind: demo-booking
+    url: https://calendly.com/rosetta-ai-alice/30min
+operational_signals:
+  api_host_live: true
+  api_host: https://api.rosetta.ai
+  cdn_live: true
+  successor_api_host_dead: true
+  successor_api_host: https://v4-api.rosetta.ai
+  docs_static_since: '2024-02'

@@ -1,0 +1,121 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://rosetta-ai.gitbook.io/help-center/ ,
+  https://github.com/rosetta-ai/online-shop-components ,
+  https://cdn.rosetta.ai/
+summary: >-
+  Rosetta.ai's entire delivered surface is client-side components. There is no
+  developer API product; what merchants install is a tag that renders on-site
+  widgets configured from the dashboard. That makes `components` the single most
+  accurate artifact type for this company, and it is captured here.
+loaders:
+- name: rosetta.min.js
+  url: https://cdn.rosetta.ai/rosetta.min.js
+  version: 2.0.0
+  install: Google Tag Manager custom HTML tag (or direct script tag)
+  status: live
+  note: >-
+    The production loader. Calls https://api.rosetta.ai/ with a Bearer token and a
+    vendor media type; see authentication/ and conventions/.
+- name: rosetta-web.js
+  url: https://cdn.rosetta.ai/rosetta-web.js
+  version: null
+  status: stale
+  note: >-
+    Newer-generation loader on the same CDN whose API base, v4-api.rosetta.ai, does
+    not resolve. Not usable.
+- name: online-shop-components.css
+  url: https://cdn.rosetta.ai/plugins/all/css/online-shop-components.css
+  status: live
+  note: Compiled stylesheet for the component families below.
+families:
+- name: Recommenders
+  kind: on-site personalization widget
+  configured_in: dashboard.rosetta.ai
+  docs: https://rosetta-ai.gitbook.io/help-center/functions/recommenders
+  layouts:
+  - in-page carousel
+  - sticky widget
+  - scroll-to-trigger
+  variants:
+  - preset recommenders
+  - custom recommenders
+  - one-click booster set
+  note: >-
+    Placement is chosen per page type ("Select the Best Page") and recommendation
+    strategy per type (including a Realtime Preference type added 2023-09).
+- name: Promotions
+  kind: on-site promotional overlay
+  docs: https://rosetta-ai.gitbook.io/help-center/functions/promotions
+  variants:
+  - AI-driven exit intent promotion
+  - banner
+  - coupon code promotion
+  - story plugin
+  note: Story plugins were added to the product in 2023-12 per the changelog.
+- name: Discovery Plugins
+  kind: on-site search/discovery
+  docs: https://rosetta-ai.gitbook.io/help-center/functions/discovery-plugins
+  variants:
+  - search plugin
+  note: Added 2024-02 per the changelog; gated to the Professional tier and above.
+source_components:
+  repository: https://github.com/rosetta-ai/online-shop-components
+  license: MIT
+  language: javascript
+  peer_dependencies:
+  - '@glidejs/glide ^3.4.1'
+  last_push: '2020-07-20'
+  published_to_registry: false
+  modules:
+  - banner
+  - carousel
+  - headline
+  - modal
+  - queue
+  note: >-
+    First-party, publicly readable source for the rendered widget families. Never
+    published to npm, no releases, no tags — the compiled CSS is nonetheless live
+    in production, so this is shipped code without a distribution channel.
+platform_plugins:
+- platform: 91APP
+  build: https://cdn.rosetta.ai/plugin-91app.js
+- platform: SHOPLINE
+  build: https://cdn.rosetta.ai/plugin-shopline.js
+  stylesheet: https://cdn.rosetta.ai/plugins/shopline/css/plugin-shopline.css
+- platform: Demandware / Salesforce Commerce Cloud
+  build: https://cdn.rosetta.ai/plugin-demandware.js
+- platform: WACA
+  build: https://cdn.rosetta.ai/plugin-waca.js
+- platform: Cyberbiz
+  repository: https://github.com/rosetta-ai/plugin-cyberbiz
+  build: null
+- platform: EasyStore
+  repository: https://github.com/rosetta-ai/plugin-easystore
+  build: null
+platform_plugins_note: >-
+  Per-storefront builds rather than a single configurable SDK. All CDN builds are
+  unpinned and unversioned; the dated `_backup-2020xxxx` siblings beside them place
+  this generation in 2020.
+distribution_observations:
+- observation: >-
+    https://cdn.rosetta.ai/ (DigitalOcean Spaces bucket "cdn.rosetta.ai-new-do",
+    sgp1) returns HTTP 200 with directory listing enabled — 381 objects
+    enumerable anonymously. Alongside the production bundles this exposes
+    `.js.map` source maps (rosetta-web.js.map, 1.4 MB), staging builds
+    (rosetta-web-staging.js, staging-rosetta-web.js), dated backup copies, and a
+    `users/` prefix of named-merchant creative assets.
+  probed: '2026-08-13'
+  status: 200
+  note: >-
+    Recorded as a factual distribution observation from an anonymous GET, not as a
+    vulnerability claim. It matters here because it is why this artifact could be
+    built at all: the component inventory is readable only because the bucket
+    lists.
+gaps:
+- No component reference documentation for developers — every component is
+  configured through the dashboard UI, not through a documented API or props
+  contract.
+- No versioned or pinned distribution of any component build.
+- No npm/registry package for the component library.

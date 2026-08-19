@@ -1,0 +1,102 @@
+generated: '2026-08-13'
+method: derived
+source: https://cdn.rosetta.ai/rosetta.min.js
+provenance_note: >-
+  Same provenance and same caveat as authentication/rosettaai-authentication.yml:
+  every convention below was observed in Rosetta.ai's own production tag, not read
+  from documentation, because Rosetta.ai publishes no API reference. Anything not
+  directly observed is recorded as `not-observed`, never guessed.
+auth_style:
+  scheme: http-bearer
+  header: 'Authorization: Bearer <token>'
+  see: authentication/rosettaai-authentication.yml
+versioning:
+  style: vendor-media-type
+  header: Accept
+  value: application/vnd.rosetta-ai.v2+json
+  current_version: v2
+  in_path: false
+  note: >-
+    Rosetta.ai versions by content negotiation, not by URL. The tag sends
+    `Accept: application/vnd.rosetta-ai.v2+json` on every call to
+    https://api.rosetta.ai/ and the paths carry no /v1 or /v2 segment. A v4
+    generation exists in a separate bundle (rosetta-web.js) which moves the paths
+    under a /api/ prefix and targets v4-api.rosetta.ai — a hostname that no longer
+    resolves. So the deployed contract is v2 and the successor is dead.
+  deprecation_policy: not-published
+  sunset_header: not-observed
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    NO idempotency support was observed. The write operations the tag issues
+    (POST /entity, POST /event, POST /engine/{id}/query) carry no idempotency key
+    header, no client-generated request id, and no documented replay semantics. No
+    `Idempotency` pointer is emitted in apis.yml, because there is nothing to point
+    at — asserting one here would be exactly the fabrication this pipeline forbids.
+pagination:
+  style: limit-param
+  params:
+    limit: integer
+    status: array
+  evidence: >-
+    The (dead-host) v4 bundle issues GET /api/recommender with
+    params:{status:["enabled"],limit:999}. That is the only pagination-shaped
+    parameter observed anywhere in the published code.
+  response_fields: not-observed
+  cursor: not-observed
+  confidence: low
+response_envelope:
+  shape: '{ "data": ... }'
+  evidence: >-
+    Both bundles unwrap responses as `e.data.data`, i.e. the HTTP body is a JSON
+    object with a top-level `data` member wrapping the payload. This is the Laravel
+    API-resource default and is consistent with the observed stack.
+  confidence: medium
+error_envelope:
+  format: not-published
+  rfc9457: false
+  problem_json: false
+  note: >-
+    No error catalogue, no error code registry, and no application/problem+json
+    anywhere. The tag's own error handling is client-side telemetry: it catches a
+    failed call, reads `error.response.config` for baseURL/url/payload, and reports
+    it internally. There is no published error contract for a consumer to code
+    against, which is why no errors/ artifact was written.
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: not-published
+  see: rate-limits/rosettaai-rate-limits.yml
+request_id_tracing:
+  header: not-observed
+  note: >-
+    No X-Request-Id / Trace-Id / correlation header observed on any call issued by
+    the tag.
+field_expansion: not-observed
+sparse_fieldsets: not-observed
+metadata_fields: not-observed
+identity_model:
+  primary: browser-fingerprint
+  note: >-
+    Entities are created against a browser fingerprint
+    (`{name:"fingerPrint:<hash>", fingerprint:<hash>, type:"user"}`) and upgraded to
+    a merchant-supplied user id when one is available. Worth recording because it
+    is the actual join key of the whole personalization product.
+merchant_data_contract:
+  kind: product-feed
+  note: >-
+    The real integration contract Rosetta.ai publishes to its customers is not an
+    API — it is a product feed plus a Google Tag Manager tag. Mandatory feed fields
+    are documented as: Product ID, Product Name, Product Description, Product
+    Landing Page URL, Product Image URL, Product Availability, Product Price.
+    Accepted formats vary by storefront platform — XML/RSS for
+    SHOPLINE/WACA/QDM/EasyStore, Facebook Catalog or Google feed URLs for
+    91APP/Cyberbiz/meepshop, and a feed URL or CSV upload for self-hosted stores —
+    with Google's Product Data Specification cited as the authority.
+  source: https://rosetta-ai.gitbook.io/help-center/onboarding/getting-started/product-feed-url
+  refresh_frequency: not-published
+cross_links:
+  authentication: authentication/rosettaai-authentication.yml
+  rate_limits: rate-limits/rosettaai-rate-limits.yml
+  lifecycle: lifecycle/rosettaai-lifecycle.yml
+  plans: plans/rosettaai-plans-pricing.yml

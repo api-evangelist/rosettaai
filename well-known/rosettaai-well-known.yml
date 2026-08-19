@@ -1,0 +1,138 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes of every Rosetta.ai host
+notes: >-
+  Recorded absence. Every /.well-known/ path was probed on all four reachable
+  Rosetta.ai hosts and none returned a real document. NO WellKnown or SecurityTxt
+  pointer is emitted in apis.yml, because nothing is actually served. Note the
+  dashboard.rosetta.ai results carefully: that host is a single-page application
+  whose catch-all route answers HTTP 200 with the same 2,465-byte HTML shell for
+  EVERY path, including paths that cannot exist. Those 200s are not documents and
+  are recorded here as misses so a later round does not re-read them as hits.
+hosts:
+- host: rosetta.ai
+  note: marketing site (Webflow-style SPA shell on 404)
+  probes:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: api.rosetta.ai
+  note: >-
+    Live first-party API host (Laravel; DigitalOcean 146.190.4.25). Returns a
+    genuine Laravel "Not Found" 404 page, so these are real negatives.
+  probes:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: dashboard.rosetta.ai
+  note: >-
+    SPA catch-all. Answers 200 with an identical 2,465-byte HTML shell for every
+    path probed. Treated as a MISS on every path — no document is served.
+  probes:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    document: false
+    reason: html-spa-shell
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    document: false
+    reason: html-spa-shell
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    document: false
+    reason: html-spa-shell
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    document: false
+    reason: html-spa-shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    document: false
+    reason: html-spa-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    document: false
+    reason: html-spa-shell
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    document: false
+    reason: html-spa-shell
+- host: rosetta-ai.gitbook.io
+  note: >-
+    Help center (GitBook). Serves a real llms.txt at /help-center/llms.txt (already
+    captured in llms/), but no /.well-known/ documents.
+  probes:
+  - path: /help-center/.well-known/security.txt
+    status: 404
+    file: null
+  - path: /help-center/.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /help-center/.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /help-center/.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /help-center/.well-known/agent.json
+    status: 404
+    file: null
+non_resolving_hosts:
+- host: status.rosetta.ai
+  result: NXDOMAIN
+- host: trust.rosetta.ai
+  result: NXDOMAIN
+- host: developer.rosetta.ai
+  result: NXDOMAIN
+- host: docs.rosetta.ai
+  result: NXDOMAIN
+summary:
+  paths_probed: 33
+  documents_found: 0
+  security_txt: false
+  agent_card: false
+  api_catalog: false
+  oauth_metadata: false
