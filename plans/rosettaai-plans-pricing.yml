@@ -125,3 +125,28 @@ notes: >-
   unit is impressions/page views served by the on-site tag, and overage is billed
   per 1,000 requests, which is the closest thing Rosetta.ai publishes to a usage
   contract.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  units: []
+  plans:
+  - name: Essential
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Professional
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Visionary
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
