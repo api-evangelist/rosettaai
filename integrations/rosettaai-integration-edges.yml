@@ -1,0 +1,18 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/rosettaai/integrations
+- https://zapier.com/apps/rosetta-ai/integrations
+- https://n8n.io/integrations/rosettaai/
+- https://composio.dev/toolkits/rosettaai
+- https://monid.ai/tools/rosettaai
+checked:
+- https://composio.dev/toolkits/rosettaai
+- https://monid.ai/tools/rosettaai
+- https://n8n.io/integrations/rosettaai/
+- https://zapier.com/apps/rosetta-ai/integrations
+- https://zapier.com/apps/rosettaai/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
